@@ -5,8 +5,8 @@ a visualization tool for golang project dependency
 ![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/own.png)
 
 
-This tool is for helping source code reading. 
-The dependency of the whole code can be visualized quickly. 
+This tool is for helping source code reading.
+The dependency of the whole code can be visualized quickly.
 
 ## Installation
 
@@ -132,14 +132,14 @@ goviz -i github.com/dotcloud/docker/runtime/execdriver/execdrivers/ -s github.co
 
 
 ### docker's metrics
-goviz has a function which outputs the metrics (instability) of go project. 
+goviz has a function which outputs the metrics (instability) of go project.
 
 ```
-goviz -i github.com/dotcloud/docker/docker -m 
+goviz -i github.com/dotcloud/docker/docker -m
 ```
-Instability is a value of 0 to 1. 
-It suggests that it is such an unstable module that this value is high. 
-It becomes easy to distinguish whether it is a module nearer to  application layer, and whether it is a module near a common library. 
+Instability is a value of 0 to 1.
+It suggests that it is such an unstable module that this value is high.
+It becomes easy to distinguish whether it is a module nearer to  application layer, and whether it is a module near a common library.
 
 
 ```
@@ -217,6 +217,3 @@ MIT
 ## Author
 
 hirokidaichi [at] gmail.com
-
-
-
