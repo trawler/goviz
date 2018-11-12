@@ -48,25 +48,25 @@ func process() int {
 	inputDir := rootCmd.Flag("input").Value.String()
 	output := rootCmd.Flag("output").Value.String()
 	reserved := rootCmd.Flag("focus").Value.String()
+	seek := rootCmd.Flag("search").Value.String()
 	leaf, _ := strconv.ParseBool(rootCmd.Flag("leaf").Value.String())
 	depth, _ := strconv.Atoi(rootCmd.Flag("depth").Value.String())
 	metricsOpt, _ := strconv.ParseBool(rootCmd.Flag("metrics").Value.String())
 
-	factory := goimport.ParseRelation(inputDir, output, leaf)
-	goimport.ImportDir(inputDir)
-
-	if factory == nil {
-		//fmt.Printf("inputdir does not exist.\n go get %s", inputDir)
-		return 1
-	}
-	root, err := goimport.ImportDir(inputDir)
+	dir, err := goimport.ImportDir(inputDir)
 	if err != nil {
 		fmt.Printf("Couldn't fetch import path: %-v", err)
 	}
-	//if !root.HasFiles() {
-	//	errorf("%s has no .go files\n", root.ImportPath)
-	//	return 1
-	//}
+	factory := goimport.ParseRelation(dir, seek, leaf)
+	if factory == nil {
+		fmt.Printf("inputdir does not exist.\n go get %s\n", inputDir)
+		return 1
+	}
+	root := factory.GetRoot()
+	if !root.HasFiles() {
+		errorf("%s has no .go files\n", root.ImportPath)
+		return 1
+	}
 	if 0 > depth {
 		errorf("-d or --depth should have positive int\n")
 		return 1

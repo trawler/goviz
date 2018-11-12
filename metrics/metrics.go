@@ -5,7 +5,7 @@ import (
 	"io"
 	"sort"
 
-	"github.com/hirokidaichi/goviz/dotwriter"
+	"github.com/trawler/goviz/dotwriter"
 )
 
 type MetricsWriter struct {

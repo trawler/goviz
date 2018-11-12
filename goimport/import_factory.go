@@ -54,6 +54,7 @@ func NewImportPathFactory(
 		seekPath,
 		leafVisibility,
 	)
+
 	self.Filter = filter
 	return self
 }
