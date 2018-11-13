@@ -2,7 +2,7 @@ goviz
 =====
 
 a visualization tool for golang project dependency
-![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/own.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/own.png)
 
 
 This tool is for helping source code reading.
@@ -11,7 +11,7 @@ The dependency of the whole code can be visualized quickly.
 ## Installation
 
 ```
-go get github.com/hirokidaichi/goviz
+go get github.com/trawler/goviz
 ```
 
 and if not being installed [graphviz](http://www.graphviz.org), install it :
@@ -30,22 +30,17 @@ goviz -i github.com/hashicorp/serf | dot -Tpng -o hoge.png
 
 ```
 Usage:
-  goviz [OPTIONS]
+  goviz [flags]
 
-Application Options:
-  -i, --input=   intput ploject name
-  -o, --output=  output file (STDOUT)
-  -d, --depth=   max plot depth of the dependency tree (128)
-  -f, --focus=   focus on the specific module
-  -s, --search=  top directory of searching
-  -l, --leaf     whether leaf nodes are plotted (false)
-  -m, --metrics  display module metrics (false)
-
-Help Options:
-  -h, --help     Show this help message
-
-exit status 1
-
+Flags:
+  -d, --depth int       max plot depth of the dependency tree (default 128)
+  -f, --focus string    focus on the specific module
+  -h, --help            help for goviz
+  -i, --input string    input project name
+  -l, --leaf            whether leaf nodes are plotted
+  -m, --metrics         display module metrics
+  -o, --output string   output file (default "STDOUT")
+  -s, --search string   top directory of searching
 ```
 
 ## Samples
@@ -56,7 +51,7 @@ exit status 1
 ```
 goviz -i github.com/mattn/anko | dot -Tpng -o anko.png
 ```
-![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/anko.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/anko.png)
 
 
 ### [serf](https://github.com/hashicorp/serf)
@@ -65,7 +60,7 @@ goviz -i github.com/mattn/anko | dot -Tpng -o anko.png
 ```
 goviz -i github.com/hashicorp/serf | dot -Tpng -o serf.png
 ```
-![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/serf.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/serf.png)
 
 
 ### [go-xslate](https://github.com/lestrrat/go-xslate)
@@ -74,7 +69,7 @@ goviz -i github.com/hashicorp/serf | dot -Tpng -o serf.png
 ```
 goviz -i github.com/lestrrat/go-xslate | dot -Tpng -o xslate.png
 ```
-![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/xslate.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/xslate.png)
 
 
 ### [vegeta](https://github.com/tsenart/vegeta)
@@ -83,7 +78,7 @@ goviz -i github.com/lestrrat/go-xslate | dot -Tpng -o xslate.png
 ```
 goviz -i github.com/tsenart/vegeta -l| dot -Tpng -o vegeta.png
 ```
-![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/vegeta.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/vegeta.png)
 
 
 ### [packer](https://github.com/mitchellh/packer)
@@ -92,7 +87,7 @@ goviz -i github.com/tsenart/vegeta -l| dot -Tpng -o vegeta.png
 ```
 goviz -i github.com/mitchellh/packer --search SELF| dot -Tpng -o packer.png
 ```
-![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/packer.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/packer.png)
 
 
 ### [docker plot depth 1](https://github.com/dotcloud/docker/docker)
@@ -101,7 +96,7 @@ goviz -i github.com/mitchellh/packer --search SELF| dot -Tpng -o packer.png
 ```
 goviz -i github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 1| dot -Tpng -o docker1.png
 ```
-![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/docker1.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/docker1.png)
 
 
 ### [docker plot depth 2](https://github.com/dotcloud/docker/docker)
@@ -110,7 +105,7 @@ goviz -i github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 1| d
 ```
 goviz -i github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 2| dot -Tpng -o docker2.png
 ```
-![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/docker2.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/docker2.png)
 
 
 ### [docker plot depth 3](https://github.com/dotcloud/docker/docker)
@@ -119,7 +114,7 @@ goviz -i github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 2| d
 ```
 goviz -i github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 3| dot -Tpng -o docker3.png
 ```
-![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/docker3.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/docker3.png)
 
 
 ### [docker&#39;s execdrivers](https://github.com/dotcloud/docker/runtime/execdriver/execdrivers/)
@@ -128,7 +123,7 @@ goviz -i github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 3| d
 ```
 goviz -i github.com/dotcloud/docker/runtime/execdriver/execdrivers/ -s github.com/dotcloud/docker| dot -Tpng -o docker-execdrivers.png
 ```
-![](https://raw.githubusercontent.com/hirokidaichi/goviz/master/images/docker-execdrivers.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/docker-execdrivers.png)
 
 
 ### docker's metrics
