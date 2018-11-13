@@ -79,9 +79,9 @@ func (self *ImportPath) Shape() string {
 
 func (self *ImportPath) Style() string {
 	if !self.HasFiles() {
-		return "dashed"
+		return "solid"
 	}
-	return "solid"
+	return "filled"
 
 }
 
