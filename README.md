@@ -74,11 +74,26 @@ goviz -i $GOPATH/src/github.com/lestrrat/go-xslate | dot -Tpng -o xslate.png
 
 ### [vegeta](https://github.com/tsenart/vegeta)
 
-
+#### plot depth 1
 ```
-goviz -i $GOPATH/src/github.com/tsenart/vegeta -l| dot -Tpng -o vegeta.png
+goviz -i $GOPATH/src/github.com/tsenart/vegeta -l -d 1 | dot -Tpng -o vegeta1.png
 ```
-![](https://raw.githubusercontent.com/trawler/goviz/master/images/vegeta.png)
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/vegeta1.png)
+#### plot depth 2
+```
+goviz -i $GOPATH/src/github.com/tsenart/vegeta -l -d 2 | dot -Tpng -o vegeta2.png
+```
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/vegeta2.png)
+#### plot depth 3
+```
+goviz -i $GOPATH/src/github.com/tsenart/vegeta -l -d 3 | dot -Tpng -o vegeta3.png
+```
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/vegeta3.png)
+#### plot depth 4
+```
+goviz -i $GOPATH/src/github.com/tsenart/vegeta -l -d 4 | dot -Tpng -o vegeta4.png
+```
+![](https://raw.githubusercontent.com/trawler/goviz/master/images/vegeta4.png)
 
 
 ### [packer](https://github.com/mitchellh/packer)
