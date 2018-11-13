@@ -14,11 +14,13 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "goviz",
 	Short: "A visualization tool for golang project dependency",
+	Args:  cobra.MinimumNArgs(0),
+	Run:   func(cmd *cobra.Command, args []string) {},
 }
 
 func init() {
 	rootCmd.PersistentFlags().StringP("input", "i", "", "input project name")
-	rootCmd.MarkFlagRequired("input")
+	rootCmd.MarkPersistentFlagRequired("input")
 	rootCmd.PersistentFlags().StringP("output", "o", "STDOUT", "output file")
 	rootCmd.PersistentFlags().IntP("depth", "d", 128, "max plot depth of the dependency tree")
 	rootCmd.PersistentFlags().StringP("focus", "f", "", "focus on the specific module")
@@ -28,22 +30,17 @@ func init() {
 }
 
 func main() {
-	err := rootCmd.Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error occurred: %v\n", err)
+	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
 	}
 
-	res := process()
-	os.Exit(res)
-
+	if err := process(); err != nil {
+		fmt.Printf("%v\n", err)
+		os.Exit(1)
+	}
 }
 
-func errorf(format string, args ...interface{}) {
-	fmt.Fprintf(os.Stderr, format, args...)
-}
-
-func process() int {
+func process() error {
 	fmt.Println()
 	inputDir := rootCmd.Flag("input").Value.String()
 	output := rootCmd.Flag("output").Value.String()
@@ -55,49 +52,44 @@ func process() int {
 
 	dir, err := goimport.ImportDir(inputDir)
 	if err != nil {
-		fmt.Printf("Couldn't fetch import path: %-v", err)
+		return fmt.Errorf("Couldn't fetch import path: %-v", err)
 	}
 	factory := goimport.ParseRelation(dir, seek, leaf)
 	if factory == nil {
-		fmt.Printf("inputdir does not exist.\n go get %s\n", inputDir)
-		return 1
+		return fmt.Errorf("directory not found: [ %s ]", inputDir)
 	}
 	root := factory.GetRoot()
 	if !root.HasFiles() {
-		errorf("%s has no .go files\n", root.ImportPath)
-		return 1
+		return fmt.Errorf("%s has no .go files", root.ImportPath)
 	}
 	if 0 > depth {
-		errorf("-d or --depth should have positive int\n")
-		return 1
+		return fmt.Errorf("-d or --depth should have positive int")
 	}
 	out := getOutputWriter(output)
 	if metricsOpt {
 		metricsWriter := metrics.New(out)
 		metricsWriter.Plot(pathToNode(factory.GetAll()))
-		return 0
+		return nil
 	}
 
 	writer := dotwriter.New(out)
 	writer.MaxDepth = depth
 	if reserved == "" {
 		writer.PlotGraph(root)
-		return 0
+		return nil
 	}
 	writer.Reversed = true
 
 	rroot := factory.Get(reserved)
 	if rroot == nil {
-		errorf("-r %s does not exist.\n ", reserved)
-		return 1
+		return fmt.Errorf("-r %s does not exist.\n ", reserved)
 	}
 	if !rroot.HasFiles() {
-		errorf("-r %s has no go files.\n ", reserved)
-		return 1
+		return fmt.Errorf("-r %s has no go files.\n ", reserved)
 	}
 
 	writer.PlotGraph(rroot)
-	return 0
+	return nil
 }
 
 func pathToNode(pathes []*goimport.ImportPath) []dotwriter.IDotNode {
