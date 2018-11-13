@@ -23,7 +23,7 @@ brew install graphviz
 ## Usage
 
 ```
-goviz -i github.com/hashicorp/serf | dot -Tpng -o hoge.png
+goviz -i $GOPATH/src/github.com/hashicorp/serf | dot -Tpng -o serf.png
 ```
 
 ### Option
@@ -49,7 +49,7 @@ Flags:
 
 
 ```
-goviz -i github.com/mattn/anko | dot -Tpng -o anko.png
+goviz -i $GOPATH/src/github.com/mattn/anko | dot -Tpng -o anko.png
 ```
 ![](https://raw.githubusercontent.com/trawler/goviz/master/images/anko.png)
 
@@ -58,7 +58,7 @@ goviz -i github.com/mattn/anko | dot -Tpng -o anko.png
 
 
 ```
-goviz -i github.com/hashicorp/serf | dot -Tpng -o serf.png
+goviz -i $GOPATH/src/github.com/hashicorp/serf | dot -Tpng -o serf.png
 ```
 ![](https://raw.githubusercontent.com/trawler/goviz/master/images/serf.png)
 
@@ -67,7 +67,7 @@ goviz -i github.com/hashicorp/serf | dot -Tpng -o serf.png
 
 
 ```
-goviz -i github.com/lestrrat/go-xslate | dot -Tpng -o xslate.png
+goviz -i $GOPATH/src/github.com/lestrrat/go-xslate | dot -Tpng -o xslate.png
 ```
 ![](https://raw.githubusercontent.com/trawler/goviz/master/images/xslate.png)
 
@@ -76,7 +76,7 @@ goviz -i github.com/lestrrat/go-xslate | dot -Tpng -o xslate.png
 
 
 ```
-goviz -i github.com/tsenart/vegeta -l| dot -Tpng -o vegeta.png
+goviz -i $GOPATH/src/github.com/tsenart/vegeta -l| dot -Tpng -o vegeta.png
 ```
 ![](https://raw.githubusercontent.com/trawler/goviz/master/images/vegeta.png)
 
@@ -85,7 +85,7 @@ goviz -i github.com/tsenart/vegeta -l| dot -Tpng -o vegeta.png
 
 
 ```
-goviz -i github.com/mitchellh/packer --search SELF| dot -Tpng -o packer.png
+goviz -i $GOPATH/src/github.com/mitchellh/packer --search SELF| dot -Tpng -o packer.png
 ```
 ![](https://raw.githubusercontent.com/trawler/goviz/master/images/packer.png)
 
@@ -94,7 +94,7 @@ goviz -i github.com/mitchellh/packer --search SELF| dot -Tpng -o packer.png
 
 
 ```
-goviz -i github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 1| dot -Tpng -o docker1.png
+goviz -i $GOPATH/src/github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 1| dot -Tpng -o docker1.png
 ```
 ![](https://raw.githubusercontent.com/trawler/goviz/master/images/docker1.png)
 
@@ -103,34 +103,16 @@ goviz -i github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 1| d
 
 
 ```
-goviz -i github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 2| dot -Tpng -o docker2.png
+goviz -i $GOPATH/src/github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 2| dot -Tpng -o docker2.png
 ```
 ![](https://raw.githubusercontent.com/trawler/goviz/master/images/docker2.png)
-
-
-### [docker plot depth 3](https://github.com/dotcloud/docker/docker)
-
-
-```
-goviz -i github.com/dotcloud/docker/docker -s github.com/dotcloud/docker -d 3| dot -Tpng -o docker3.png
-```
-![](https://raw.githubusercontent.com/trawler/goviz/master/images/docker3.png)
-
-
-### [docker&#39;s execdrivers](https://github.com/dotcloud/docker/runtime/execdriver/execdrivers/)
-
-
-```
-goviz -i github.com/dotcloud/docker/runtime/execdriver/execdrivers/ -s github.com/dotcloud/docker| dot -Tpng -o docker-execdrivers.png
-```
-![](https://raw.githubusercontent.com/trawler/goviz/master/images/docker-execdrivers.png)
 
 
 ### docker's metrics
 goviz has a function which outputs the metrics (instability) of go project.
 
 ```
-goviz -i github.com/dotcloud/docker/docker -m
+goviz -i $GOPATH/src/github.com/dotcloud/docker/docker -m
 ```
 Instability is a value of 0 to 1.
 It suggests that it is such an unstable module that this value is high.
