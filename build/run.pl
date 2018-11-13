@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+trawler#!/usr/bin/env perl
 use strict;
 use warnings;
 use Text::Xslate;
@@ -88,7 +88,7 @@ $_->exec for @SAMPLES;
 my $own = Sample->new(
     {
         image  => "own.png",
-        repo   => "github.com/hirokidaichi/goviz",
+        repo   => "github.com/trawler/goviz",
         option => "-s SELF"
     }
 );
